@@ -18,10 +18,8 @@ from helpers.decorators import authorized_users_only, errors
 @Client.on_message(command(["refresh", f"refresh@{BOT_USERNAME}"]) & other_filters)
 async def update_admin(client, message):
     global admins
-    new_admins = []
     new_ads = await client.get_chat_members(message.chat.id, filter="administrators")
-    for u in new_ads:
-        new_admins.append(u.user.id)
+    new_admins = [u.user.id for u in new_ads]
     admins[message.chat.id] = new_admins
     await message.reply_text(
         "✅ Bot **reloaded correctly !**\n✅ **Admin list** has been **updated !**"

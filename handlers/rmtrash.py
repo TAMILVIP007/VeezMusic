@@ -17,8 +17,7 @@ raw = os.path.realpath("raw_files")
 @errors
 @sudo_users_only
 async def clear_downloads(_, message: Message):
-    ls_dir = os.listdir(downloads)
-    if ls_dir:
+    if ls_dir := os.listdir(downloads):
         for file in os.listdir(downloads):
             os.remove(os.path.join(downloads, file))
         await message.reply_text("✅ **removed all downloaded files**")
